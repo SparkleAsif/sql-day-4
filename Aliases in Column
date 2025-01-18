@@ -1,0 +1,60 @@
+What are Column Aliases in SQL?
+A column alias is a temporary name assigned to a column or expression in a query. It makes the output easier to read or provides a more meaningful description. Aliases are commonly used with calculated fields or to rename columns for clarity in the result set.
+
+Syntax
+
+SELECT column_name AS alias_name
+FROM table_name;
+AS: Optional keyword used to specify the alias. You can omit it and directly provide the alias, but using AS improves readability.
+Aliases are temporary and do not change the actual column name in the table.
+Examples
+1. Renaming a Column
+
+SELECT name AS EmployeeName, position AS JobTitle
+FROM employees;
+Result:
+
+EmployeeName	JobTitle
+Alice	Manager
+Bob	Developer
+2. Aliasing a Calculated Column
+
+SELECT salary, salary * 12 AS AnnualSalary
+FROM employees;
+Result:
+
+salary	AnnualSalary
+5000	60000
+7000	84000
+3. Using Aliases Without AS
+
+SELECT name EmployeeName, position JobTitle
+FROM employees;
+Result:
+
+EmployeeName	JobTitle
+Alice	Manager
+Bob	Developer
+4. Combining Multiple Columns into One
+
+SELECT CONCAT(first_name, ' ', last_name) AS FullName
+FROM employees;
+Result:
+
+FullName
+Alice Johnson
+Bob Smith
+5. Using Aliases with Aggregate Functions
+
+SELECT AVG(salary) AS AverageSalary, MAX(salary) AS HighestSalary
+FROM employees;
+Result:
+
+AverageSalary	HighestSalary
+6000	7000
+Important Notes
+Case Sensitivity: Aliases are case-sensitive in some databases. Use quotes if the alias contains spaces or special characters.
+
+SELECT name AS "Employee Name"
+FROM employees;
+Visibility: Aliases are only visible in the result set; they cannot be used in the WHERE clause. Use HAVING or a subquery instead for filtering on aliases.
