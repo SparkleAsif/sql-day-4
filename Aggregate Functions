@@ -1,0 +1,95 @@
+What are Aggregate Functions in SQL?
+Aggregate functions in SQL perform calculations on a set of rows and return a single result. They are commonly used with the GROUP BY clause for summarizing data, such as totals, averages, or counts.
+
+Common Aggregate Functions
+COUNT()
+Returns the number of rows in a result set.
+
+SELECT COUNT(*) FROM table_name;
+Example: Count the number of employees in a table.
+
+SELECT COUNT(*) AS total_employees
+FROM employees;
+SUM()
+Returns the sum of a numeric column.
+
+SELECT SUM(column_name) FROM table_name;
+Example: Calculate the total salary of all employees.
+
+SELECT SUM(salary) AS total_salary
+FROM employees;
+AVG()
+Returns the average of a numeric column.
+
+SELECT AVG(column_name) FROM table_name;
+Example: Find the average salary of employees.
+
+SELECT AVG(salary) AS average_salary
+FROM employees;
+MIN()
+Returns the smallest value in a column.
+
+SELECT MIN(column_name) FROM table_name;
+Example: Find the lowest salary.
+
+SELECT MIN(salary) AS lowest_salary
+FROM employees;
+MAX()
+Returns the largest value in a column.
+
+SELECT MAX(column_name) FROM table_name;
+Example: Find the highest salary.
+
+SELECT MAX(salary) AS highest_salary
+FROM employees;
+Using Aggregate Functions with GROUP BY
+The GROUP BY clause groups rows that have the same values in specified columns, and aggregate functions are applied to each group.
+
+Example: Total Salary by Department
+
+SELECT department, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department;
+Result:
+
+department	total_salary
+IT	150000
+HR	100000
+Using Aggregate Functions with HAVING
+The HAVING clause filters groups based on aggregate functions. It is similar to the WHERE clause but works with aggregated data.
+
+Example: Departments with Total Salary Greater than 120,000
+
+SELECT department, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department
+HAVING SUM(salary) > 120000;
+Result:
+
+department	total_salary
+IT	150000
+Combining Aggregate Functions
+You can use multiple aggregate functions in the same query.
+
+Example: Count, Minimum, and Maximum Salary by Department
+
+SELECT department, COUNT(*) AS employee_count, MIN(salary) AS min_salary, MAX(salary) AS max_salary
+FROM employees
+GROUP BY department;
+Result:
+
+department	employee_count	min_salary	max_salary
+IT	10	3000	9000
+HR	5	4000	8000
+Important Notes
+Null Values: Aggregate functions (except COUNT) ignore NULL values.
+DISTINCT Keyword: Use DISTINCT to consider only unique values.
+
+SELECT COUNT(DISTINCT department) AS unique_departments
+FROM employees;
+Performance: Be mindful of performance when using aggregate functions on large datasets.
+Practice Exercises
+Write a query to find the total number of employees, the average salary, and the highest salary in a company.
+Group the employees by job title and find the total and average salary for each job title.
+Find departments where the total salary exceeds 200,000.
+Let me know if you'd like help with these! 
