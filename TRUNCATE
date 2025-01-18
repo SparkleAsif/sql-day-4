@@ -1,0 +1,53 @@
+Key Features of TRUNCATE
+Deletes All Rows: Removes all data from the table.
+Resets AUTO_INCREMENT: Resets auto-increment counters (if applicable).
+Preserves Table Structure: Does not drop the table; the schema remains intact.
+Faster Than DELETE: Works faster because it doesn't log individual row deletions.
+Non-Transactional: Cannot be rolled back in most database systems, so use it cautiously.
+Syntax
+
+TRUNCATE TABLE table_name;
+Example
+1. Creating a Sample Table
+
+Edit
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    position VARCHAR(50)
+);
+2. Inserting Sample Data
+
+INSERT INTO employees (name, position)
+VALUES
+('Alice', 'Manager'),
+('Bob', 'Developer'),
+('Charlie', 'Designer');
+3. Viewing the Data
+
+SELECT * FROM employees;
+Result:
+
+id	name	position
+1	Alice	Manager
+2	Bob	Developer
+3	Charlie	Designer
+4. Using TRUNCATE
+
+TRUNCATE TABLE employees;
+5. Viewing the Data After TRUNCATE
+
+SELECT * FROM employees;
+Result: (No rows returned – the table is empty.)
+
+Comparison: TRUNCATE vs DELETE
+Feature	TRUNCATE	DELETE
+Deletes All Rows	Yes	Yes (if no WHERE clause)
+Affects AUTO_INCREMENT	Resets counter	Does not reset counter
+Speed	Faster	Slower
+Rollback in Transactions	Not Supported	Supported
+Log Individual Rows	No	Yes
+When to Use TRUNCATE
+You want to clear all data in a table.
+You do not need to maintain row-by-row logs or rollbacks.
+You want a quick and efficient way to empty the table.
