@@ -1,0 +1,86 @@
+What are Wildcard Operators in SQL?
+
+Wildcard operators in SQL are special characters used with the LIKE operator to perform pattern matching in string searches. 
+They allow you to search for data in a table when you do not know the exact value, making your queries more flexible.
+
+Wildcard Characters
+% (Percent)
+
+Represents zero, one, or multiple characters.
+Example:
+'a%' matches any value starting with 'a' (e.g., 'apple', 'aardvark').
+'%a' matches any value ending with 'a' (e.g., 'data', 'pizza').
+_ (Underscore)
+
+Represents a single character.
+Example:
+'a_' matches 'an', 'at', etc.
+'a_c' matches 'abc', 'arc', etc.
+[] (Square Brackets)
+
+Matches any single character within the brackets (specific to some databases, e.g., SQL Server).
+Example:
+'a[bc]d' matches 'abd' or 'acd'.
+'a[1-5]d' matches 'a1d', 'a2d', ..., 'a5d'.
+[^] or [!] (Not Operator)
+
+Matches any single character NOT within the brackets.
+Example:
+'a[^bc]d' matches 'aed' but not 'abd' or 'acd'.
+Using Wildcards with LIKE
+Basic Syntax
+
+SELECT column_name
+FROM table_name
+WHERE column_name LIKE pattern;
+Examples
+1. Using %
+Find names that start with "Jo":
+
+SELECT name
+FROM employees
+WHERE name LIKE 'Jo%';
+Matches: 'John', 'Joanna', 'Jordan'
+
+2. Using _
+Find names with exactly 4 characters:
+
+SELECT name
+FROM employees
+WHERE name LIKE '____';
+Matches: 'John', 'Mary', 'Sara'
+
+3. Using % and _ Together
+Find names that start with "J", have any single character, and then "n":
+
+SELECT name
+FROM employees
+WHERE name LIKE 'J_n%';
+Matches: 'John', 'Jenny'
+
+4. Using [ ]
+Find names that start with "A" or "B":
+
+SELECT name
+FROM employees
+WHERE name LIKE '[AB]%';
+Matches: 'Alice', 'Bob'
+
+5. Using [^]
+Find names that do NOT start with "A" or "B":
+
+SELECT name
+FROM employees
+WHERE name LIKE '[^AB]%';
+Matches: 'John', 'Charlie'
+
+Wildcards vs. Regular Expressions
+Wildcards are simpler and limited to use with the LIKE operator.
+If you need more complex patterns (e.g., starts with a vowel), consider using regular expressions (if supported by your database, e.g., MySQL's REGEXP).
+Practice Exercise
+Given a table students with the column name, write queries to:
+
+Find all names containing the letter "a".
+Find all names ending with "son".
+Find all names with the second character "e".
+Try it out, and let me know if you need help with the solutions! 😊
